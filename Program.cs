@@ -1,30 +1,28 @@
+﻿using CoffeeShop.Models.Interface;
 using coffeeShop.Models.Interfaces;
-using CoffeeShop.Data;
 using CoffeeShop.Models.interfaces;
+using CoffeeShop.Data;
 using CoffeeShop.Models.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Dependency Injection
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IShoppingCartRepository>(sp =>
-    ShoppingCartRepository.GetCart(sp));
+builder.Services.AddScoped<IShoppingCartRepository>(sp => ShoppingCartRepository.GetCart(sp));
 
-// DbContext
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
 builder.Services.AddDbContext<CoffeeshopDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CoffeeShopDbContextConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CoffeeshopDbContextConnection")));
 
-// Session & HTTP Context
+
 builder.Services.AddSession();
-builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpContextAccessor(); 
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -37,6 +35,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

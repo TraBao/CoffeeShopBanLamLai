@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CoffeeShop.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace CoffeeShop.Data
 {
@@ -13,7 +14,10 @@ namespace CoffeeShop.Data
         public DbSet<Product> Products { get; set; }
 
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
-        //seed data
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

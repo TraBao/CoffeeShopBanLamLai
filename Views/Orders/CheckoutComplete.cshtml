@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Đặt hàng thành công";
+}
+
+<div class="container text-center mt-5 mb-5">
+    <img src="https://cdn-icons-png.flaticon.com/512/148/148767.png"
+         class="img-fluid mb-4"
+         style="width: 200px; height: 200px; margin-left: auto; margin-right: auto;" alt="Order Success">
+
+    <h1><strong>@ViewBag.CheckoutCompleteMessage</strong></h1>
+    <br>
+    <p>Cảm ơn bạn đã tin tưởng và mua hàng tại cửa hàng của chúng tôi!</p>
+    <p>Chúng tôi sẽ liên hệ với bạn sớm nhất để xác nhận đơn hàng.</p>
+    <br>
+    <a class="btn btn-primary w-20" asp-controller="Products" asp-action="Shop">
+        Tiếp tục mua sắm
+    </a>
+</div>
