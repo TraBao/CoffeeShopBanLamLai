@@ -1,5 +1,4 @@
-﻿
-using CoffeeShop.Models.interfaces;
+﻿using CoffeeShop.Models.interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.Controllers
