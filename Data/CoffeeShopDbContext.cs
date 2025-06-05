@@ -1,27 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CoffeeShop.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
+using Microsoft.AspNetCore.Identity.UI;
 
 namespace CoffeeShop.Data
 {
-    public class CoffeeshopDbContext : DbContext
+    public class CoffeeshopDbContext : IdentityDbContext<IdentityUser> 
     {
         public CoffeeshopDbContext(DbContextOptions<CoffeeshopDbContext> options) : base(options)
         {
 
         }
+
         public DbSet<Product> Products { get; set; }
-
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
-
-        public DbSet<Order> Orders { get; set; }
-
+        public DbSet<Order> Orders { get; set; } 
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Product>().HasData(
+            base.OnModelCreating(builder);
+
+            builder.Entity<Product>().HasData(
                 new Product
                 {
                     Id = 1,
@@ -98,5 +99,3 @@ namespace CoffeeShop.Data
         }
     }
 }
-
-
